@@ -9,6 +9,13 @@ pinned: true
 license: mit
 hardware: zero-gpu
 tags:
+  - track:backyard
+  - sponsor:openbmb
+  - sponsor:openai
+  - achievement:offgrid
+  - achievement:offbrand
+  - achievement:tiny-titan
+  - achievement:best-demo
   - asl
   - sign-language
   - mediapipe
@@ -57,11 +64,11 @@ Hello, Yes, No, Thank You, Help, Pain, Head, Back, Sick, Fever, Medicine, Water,
 
 ## Demo Video
 
-[Link to demo video]
+https://youtu.be/qynGluC2ZLc
 
 ## Social Post
 
-[Link to social post]
+https://x.com/JaspalS44414885/status/2066665273739092445
 
 ## Built for
 

@@ -15,6 +15,10 @@ Practice American Sign Language with real-time webcam feedback and DTW-based sco
 
 Watch the demo video: https://youtu.be/qynGluC2ZLc
 
+## Social Post
+
+Read the launch post: https://x.com/JaspalS44414885/status/2066665273739092445
+
 ## What it does
 
 - **Practice tab** — reference LP video on the left, live webcam with MediaPipe landmark detection on the right. Show your hands to auto-start recording, drop them to stop and score.
