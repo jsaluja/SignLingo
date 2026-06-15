@@ -40,16 +40,9 @@ App runs at http://localhost:5173
 
 Copy `app/.env.example` to `app/.env` and fill in your Firebase project config to enable Google Sign-In and cross-device progress sync. See `firestore.rules` for the required Firestore security rules.
 
-## Adding signs
+## Custom signs
 
-Run `extract_lp_landmarks.py` to extract landmarks from new LP videos:
-
-```bash
-pip install mediapipe opencv-python
-python extract_lp_landmarks.py
-```
-
-Requires `hand_landmarker.task` and `pose_landmarker_lite.task` in the repo root.
+Use **Add Sign** in the app to add your own practice items and organize signs into collections.
 
 ## Tech
 
