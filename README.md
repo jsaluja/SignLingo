@@ -51,7 +51,9 @@ Use **Add Sign** in the app to add your own practice items and organize signs in
 
 ## Tech
 
-- React + Vite
+- MiniCPM-V via OpenBMB for AI coaching
+- OpenAI Codex-assisted development
 - MediaPipe Tasks Vision (hand + pose landmarks)
 - DTW comparison in JS
 - Firebase Auth + Firestore (optional)
+- React + Vite
