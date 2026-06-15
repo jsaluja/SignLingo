@@ -97,11 +97,20 @@ export function isPassing(score, passThreshold = 70) {
 }
 
 export function countHandsRaw(frames) {
-  let leftCount = 0, rightCount = 0;
+  let leftCount = 0, rightCount = 0, handFrames = 0, twoHandFrames = 0;
   for (const f of frames) {
-    if (f.leftHand) leftCount++;
-    if (f.rightHand) rightCount++;
+    const leftHand = f.leftHand || f.left_hand;
+    const rightHand = f.rightHand || f.right_hand;
+    const handsInFrame = (leftHand ? 1 : 0) + (rightHand ? 1 : 0);
+
+    if (leftHand) leftCount++;
+    if (rightHand) rightCount++;
+    if (handsInFrame > 0) handFrames++;
+    if (handsInFrame === 2) twoHandFrames++;
   }
-  const dominantHands = (leftCount > frames.length * 0.3 ? 1 : 0) + (rightCount > frames.length * 0.3 ? 1 : 0);
-  return { leftCount, rightCount, dominantHands };
+
+  const twoHandRatio = handFrames > 0 ? twoHandFrames / handFrames : 0;
+  const dominantHands = twoHandFrames >= 5 && twoHandRatio > 0.25 ? 2 : (handFrames > 0 ? 1 : 0);
+
+  return { leftCount, rightCount, handFrames, twoHandFrames, dominantHands };
 }
