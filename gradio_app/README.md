@@ -18,6 +18,8 @@ tags:
   - build-small
   - off-brand
   - tiny-titan
+  - best-demo
+  - codex
 ---
 
 # SignLingo ASL Coach
@@ -49,9 +51,9 @@ Learn American Sign Language with real-time AI coaching. Built for the **Hugging
 | Coaching VLM | MiniCPM-V 4.6 on HF Zero GPU |
 | Reference Signs | Lifeprint ASL Dictionary |
 
-## Vocabulary (12 signs)
+## Vocabulary (23 signs)
 
-Hello, Yes, No, Thank You, Pain, Head, Back, Sick, Fever, Medicine, Water, Blood
+Hello, Yes, No, Thank You, Help, Pain, Head, Back, Sick, Fever, Medicine, Water, Blood, Doctor, Nurse, Emergency, Bank, Money, Pay, Credit Card, Account, Deposit, Withdraw
 
 ## Demo Video
 
