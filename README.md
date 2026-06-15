@@ -10,9 +10,9 @@ tags:
 # SignLingo
 
 [![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Space-ffcc4d?style=for-the-badge)](https://huggingface.co/spaces/build-small-hackathon/SignLingo)
-[![Gradio](https://img.shields.io/badge/Gradio-App-f97316?style=for-the-badge)](https://www.gradio.app/)
 [![OpenAI Codex](https://img.shields.io/badge/OpenAI-Codex-111827?style=for-the-badge)](https://openai.com/codex/)
 [![OpenBMB MiniCPM--V](https://img.shields.io/badge/OpenBMB-MiniCPM--V-2563eb?style=for-the-badge)](https://github.com/OpenBMB/MiniCPM-V)
+[![Gradio](https://img.shields.io/badge/Gradio-App-f97316?style=for-the-badge)](https://www.gradio.app/)
 
 Practice American Sign Language with real-time webcam feedback and DTW-based scoring.
 
