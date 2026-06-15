@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getVideoUrl } from "../lib/vocabulary";
+import { getVideoUrl, COLLECTIONS } from "../lib/vocabulary";
 
 function SignCard({ sign, index, isActive, isCompleted, isCustom, isSelecting, isSelected, onPractice, onToggleSelect }) {
   const videoUrl = sign.videoUrl || getVideoUrl(sign.word);
@@ -36,7 +36,11 @@ function SignCard({ sign, index, isActive, isCompleted, isCustom, isSelecting, i
   );
 }
 
-export default function LibraryView({ vocabulary, builtInCount, currentWordIdx, completedWords, onPractice, onAddSign, onDeleteSigns }) {
+export default function LibraryView({
+  vocabulary, builtInCount, currentWordIdx, completedWords,
+  onPractice, onAddSign, onDeleteSigns,
+  customCollections = [], onAddCollection, onDeleteCollection,
+}) {
   const [isSelecting, setIsSelecting] = useState(false);
   const [selectedSigns, setSelectedSigns] = useState(new Set());
 
@@ -64,12 +68,48 @@ export default function LibraryView({ vocabulary, builtInCount, currentWordIdx, 
     setIsSelecting(false);
   };
 
+  const wordMap = Object.fromEntries(vocabulary.map((v, i) => [v.word, { v, i }]));
+
+  // Words claimed by any collection
+  const allCollectionWords = new Set([
+    ...Object.values(COLLECTIONS).flatMap((c) => c.words),
+    ...customCollections.flatMap((c) => c.words),
+  ]);
+
+  const renderSection = (title, words, canDelete, onDelete) => {
+    const signs = words.map((w) => wordMap[w]).filter(Boolean);
+    if (signs.length === 0) return null;
+    return (
+      <div className="library-section">
+        <div className="library-section-header">
+          <span className="library-section-title">{title}</span>
+          {canDelete && (
+            <button className="library-section-delete" onClick={onDelete}>✕</button>
+          )}
+        </div>
+        <div className="library-grid">
+          {signs.map(({ v, i }) => (
+            <SignCard key={v.word} sign={v} index={i} isActive={i === currentWordIdx}
+              isCompleted={completedWords.has(v.word)} isCustom={i >= builtInCount}
+              isSelecting={false} isSelected={false} onPractice={onPractice} onToggleSelect={() => {}} />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  // Signs not in any collection
+  const generalSigns = vocabulary.filter((v) => !allCollectionWords.has(v.word));
+
   return (
     <div className="library-view">
       <div className="library-toolbar">
         {!isSelecting ? (
           <>
             <button className="add-sign-btn" onClick={onAddSign}>+ Add Sign</button>
+            {onAddCollection && (
+              <button className="add-sign-btn" onClick={onAddCollection}>+ Add Collection</button>
+            )}
             {hasCustomSigns && (
               <button className="select-btn" onClick={() => setIsSelecting(true)}>Select</button>
             )}
@@ -83,22 +123,39 @@ export default function LibraryView({ vocabulary, builtInCount, currentWordIdx, 
           </>
         )}
       </div>
-      <div className="library-grid">
-        {vocabulary.map((v, i) => (
-          <SignCard
-            key={v.word}
-            sign={v}
-            index={i}
-            isActive={i === currentWordIdx}
-            isCompleted={completedWords.has(v.word)}
-            isCustom={i >= builtInCount}
-            isSelecting={isSelecting}
-            isSelected={selectedSigns.has(v.word)}
-            onPractice={onPractice}
-            onToggleSelect={toggleSelect}
-          />
-        ))}
-      </div>
+
+      {/* Custom collections */}
+      {customCollections.map((col) =>
+        renderSection(
+          `${col.icon} ${col.display}`,
+          col.words,
+          true,
+          () => { if (confirm(`Delete collection "${col.display}"?`)) onDeleteCollection(col.key); }
+        )
+      )}
+
+      {/* Built-in collections */}
+      {Object.values(COLLECTIONS).map((col) =>
+        renderSection(`${col.icon} ${col.display}`, col.words, false, null)
+      )}
+
+      {/* General — signs not in any collection */}
+      {generalSigns.length > 0 && (
+        <div className="library-section">
+          <div className="library-section-title">General</div>
+          <div className="library-grid">
+            {generalSigns.map((v) => {
+              const i = vocabulary.findIndex((x) => x.word === v.word);
+              return (
+                <SignCard key={v.word} sign={v} index={i} isActive={i === currentWordIdx}
+                  isCompleted={completedWords.has(v.word)} isCustom={i >= builtInCount}
+                  isSelecting={isSelecting} isSelected={selectedSigns.has(v.word)}
+                  onPractice={onPractice} onToggleSelect={toggleSelect} />
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

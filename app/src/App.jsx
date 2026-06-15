@@ -5,10 +5,11 @@ import WebcamPanel from "./components/WebcamPanel";
 import ScoreDisplay from "./components/ScoreDisplay";
 import LibraryView from "./components/LibraryView";
 import AddSignModal from "./components/AddSignModal";
+import AddCollectionModal from "./components/AddCollectionModal";
 import AuthButton from "./components/AuthButton";
 import { auth, firebaseEnabled } from "./lib/firebase";
 import { loadLocalProgress, saveLocalProgress, loadCloudProgress, saveCloudProgress, mergeProgress } from "./lib/progress";
-import { VOCABULARY, getVideoUrl, getLandmarksUrl } from "./lib/vocabulary";
+import { VOCABULARY, COLLECTIONS, getVideoUrl, getLandmarksUrl } from "./lib/vocabulary";
 import { normalizeSequence } from "./lib/normalize";
 import { compareSequences, isPassing } from "./lib/dtw";
 import { getSigningFeedback, feedbackEnabled } from "./lib/feedback";
@@ -24,6 +25,10 @@ function App() {
   const [customSigns, setCustomSigns] = useState([]);
   const [view, setView] = useState("practice");
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddCollectionModal, setShowAddCollectionModal] = useState(false);
+  const [customCollections, setCustomCollections] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("customCollections") || "[]"); } catch { return []; }
+  });
   const [landmarks, setLandmarks] = useState(null);
   const [score, setScore] = useState(null);
   const [passed, setPassed] = useState(false);
@@ -34,8 +39,16 @@ function App() {
   const [debugLogs, setDebugLogs] = useState([]);
   const [feedback, setFeedback] = useState(null);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [activeCollection, setActiveCollection] = useState(null);
 
   const vocabulary = [...VOCABULARY, ...customSigns];
+  const allCollections = {
+    ...COLLECTIONS,
+    ...Object.fromEntries(customCollections.map((c) => [c.key, c])),
+  };
+  const practiceVocabulary = activeCollection
+    ? vocabulary.filter((v) => allCollections[activeCollection]?.words.includes(v.word))
+    : vocabulary;
 
   const isRecordingRef = useRef(false);
   const scoreRef = useRef(null);
@@ -59,6 +72,7 @@ function App() {
 
   // Persist to localStorage on every change
   useEffect(() => { saveLocalProgress(completedWords); }, [completedWords]);
+  useEffect(() => { localStorage.setItem("customCollections", JSON.stringify(customCollections)); }, [customCollections]);
 
   // Firebase auth — sign-in triggers cloud sync
   useEffect(() => {
@@ -226,8 +240,16 @@ function App() {
       });
   }, [videoUrl, currentWord.display, currentWord.description]);
 
-  const nextWord = () => setCurrentWordIdx((i) => (i + 1) % vocabLenRef.current);
-  const prevWord = () => setCurrentWordIdx((i) => (i - 1 + vocabLenRef.current) % vocabLenRef.current);
+  const nextWord = () => {
+    const pIdx = practiceVocabulary.findIndex((v) => v.word === vocabulary[currentWordIdx]?.word);
+    const next = practiceVocabulary[(pIdx + 1) % practiceVocabulary.length];
+    setCurrentWordIdx(vocabulary.findIndex((v) => v.word === next.word));
+  };
+  const prevWord = () => {
+    const pIdx = practiceVocabulary.findIndex((v) => v.word === vocabulary[currentWordIdx]?.word);
+    const prev = practiceVocabulary[(pIdx - 1 + practiceVocabulary.length) % practiceVocabulary.length];
+    setCurrentWordIdx(vocabulary.findIndex((v) => v.word === prev.word));
+  };
 
   const handlePractice = (idx) => { setCurrentWordIdx(idx); setView("practice"); };
 
@@ -235,6 +257,13 @@ function App() {
     setCustomSigns((prev) => [...prev, sign]);
     setCurrentWordIdx(vocabLenRef.current);
     setView("practice");
+  };
+
+  const handleAddCollection = (collection) => setCustomCollections((prev) => [...prev, collection]);
+
+  const handleDeleteCollection = (key) => {
+    setCustomCollections((prev) => prev.filter((c) => c.key !== key));
+    if (activeCollection === key) setActiveCollection(null);
   };
 
   const handleDeleteSigns = (wordsToDelete) => {
@@ -278,21 +307,40 @@ function App() {
           onPractice={handlePractice}
           onAddSign={() => setShowAddModal(true)}
           onDeleteSigns={handleDeleteSigns}
+          customCollections={customCollections}
+          onAddCollection={() => setShowAddCollectionModal(true)}
+          onDeleteCollection={handleDeleteCollection}
         />
+      )}
+
+      {view === "practice" && (
+        <div className="collection-pills practice-collection-pills">
+          <button className={`collection-pill${!activeCollection ? " active" : ""}`} onClick={() => setActiveCollection(null)}>All</button>
+          {Object.entries(allCollections).map(([key, col]) => (
+            <button
+              key={key}
+              className={`collection-pill${activeCollection === key ? " active" : ""}`}
+              onClick={() => setActiveCollection(activeCollection === key ? null : key)}
+            >{col.icon} {col.display}</button>
+          ))}
+        </div>
       )}
 
       {view === "practice" && (
         <nav className="sign-nav">
           <button className="sign-nav-arrow" onClick={prevWord}>&#8592;</button>
           <div className="progress">
-            {vocabulary.map((v, i) => (
-              <span
-                key={v.word}
-                className={`dot${i === currentWordIdx ? " current" : ""}${completedWords.has(v.word) ? " completed" : ""}`}
-                onClick={() => setCurrentWordIdx(i)}
-                title={v.display}
-              />
-            ))}
+            {practiceVocabulary.map((v) => {
+              const i = vocabulary.findIndex((x) => x.word === v.word);
+              return (
+                <span
+                  key={v.word}
+                  className={`dot${i === currentWordIdx ? " current" : ""}${completedWords.has(v.word) ? " completed" : ""}`}
+                  onClick={() => setCurrentWordIdx(i)}
+                  title={v.display}
+                />
+              );
+            })}
           </div>
           <button className="sign-nav-arrow" onClick={nextWord}>&#8594;</button>
         </nav>
@@ -339,6 +387,14 @@ function App() {
 
       {showAddModal && (
         <AddSignModal onAdd={handleAddSign} onClose={() => setShowAddModal(false)} />
+      )}
+
+      {showAddCollectionModal && (
+        <AddCollectionModal
+          vocabulary={vocabulary}
+          onAdd={handleAddCollection}
+          onClose={() => setShowAddCollectionModal(false)}
+        />
       )}
     </div>
   );

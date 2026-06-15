@@ -125,6 +125,40 @@ header h1 {
   color: var(--highlight);
 }
 
+/* Collection filter pills */
+.collection-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 2rem;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--accent);
+  flex-wrap: wrap;
+}
+
+.collection-pill {
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.collection-pill:hover {
+  border-color: var(--text-dim);
+  color: var(--text);
+}
+
+.collection-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
 /* Sign navigation bar */
 .sign-nav {
   display: flex;
@@ -207,11 +241,98 @@ header h1 {
   gap: 0.75rem;
 }
 
+.library-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .library-section-title {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-dim);
+}
+
+.library-section-delete {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+
+.library-section-delete:hover {
+  color: var(--highlight);
+  background: rgba(233, 69, 96, 0.1);
+}
+
+.icon-picker {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.icon-option {
+  font-size: 1.3rem;
+  padding: 0.3rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--bg-dark);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.icon-option.active {
+  border-color: var(--highlight);
+}
+
+.word-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  max-height: 160px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+}
+
+.word-option {
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.word-option.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.modal-input {
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.modal-input:focus {
+  border-color: var(--highlight);
 }
 
 .library-grid {
