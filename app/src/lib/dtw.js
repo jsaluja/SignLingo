@@ -95,3 +95,13 @@ export function compareSequences(userSeq, refSeq, threshold = 0.5) {
 export function isPassing(score, passThreshold = 70) {
   return score >= passThreshold;
 }
+
+export function countHandsRaw(frames) {
+  let leftCount = 0, rightCount = 0;
+  for (const f of frames) {
+    if (f.leftHand) leftCount++;
+    if (f.rightHand) rightCount++;
+  }
+  const dominantHands = (leftCount > frames.length * 0.3 ? 1 : 0) + (rightCount > frames.length * 0.3 ? 1 : 0);
+  return { leftCount, rightCount, dominantHands };
+}
