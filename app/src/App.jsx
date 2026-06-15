@@ -203,6 +203,21 @@ function App() {
       return;
     }
 
+    const userHands = countHandsRaw(userFramesRef.current);
+    const refHands = countHandsRaw(refFrames);
+    if (userHands.dominantHands !== refHands.dominantHands) {
+      const msg = refHands.dominantHands === 2
+        ? "This sign uses 2 hands, but you only used 1"
+        : "This sign uses 1 hand, but you used 2";
+      latestScoreRef.current = 0;
+      latestPassedRef.current = false;
+      setScore(0);
+      setPassed(false);
+      setFeedback(msg);
+      setIsRecording(false);
+      return;
+    }
+
     const aspectRatio = (landmarks.width || 1280) / (landmarks.height || 720);
     const userNorm = normalizeSequence(userFramesRef.current, aspectRatio);
     const refNorm = normalizeSequence(refFrames, aspectRatio);
