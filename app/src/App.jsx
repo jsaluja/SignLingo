@@ -11,7 +11,7 @@ import { auth, firebaseEnabled } from "./lib/firebase";
 import { loadLocalProgress, saveLocalProgress, loadCloudProgress, saveCloudProgress, mergeProgress } from "./lib/progress";
 import { VOCABULARY, COLLECTIONS, getVideoUrl, getLandmarksUrl } from "./lib/vocabulary";
 import { normalizeSequence } from "./lib/normalize";
-import { compareSequences, isPassing } from "./lib/dtw";
+import { compareSequences, isPassing, countHandsRaw } from "./lib/dtw";
 import { getSigningFeedback, feedbackEnabled } from "./lib/feedback";
 import "./App.css";
 
@@ -230,13 +230,16 @@ function App() {
     getSigningFeedback(blob, currentWord.display, currentWord.description || "", latestScoreRef.current, videoUrl)
       .then((text) => {
         if (feedbackReqRef.current === reqId) {
-          setFeedback(text);
+          setFeedback(text || "AI coaching is temporarily unavailable. Try again in a moment.");
           setFeedbackLoading(false);
         }
       })
       .catch((err) => {
         console.error("[Feedback] Error:", err);
-        if (feedbackReqRef.current === reqId) setFeedbackLoading(false);
+        if (feedbackReqRef.current === reqId) {
+          setFeedback("AI coaching is temporarily unavailable. Try again in a moment.");
+          setFeedbackLoading(false);
+        }
       });
   }, [videoUrl, currentWord.display, currentWord.description]);
 
