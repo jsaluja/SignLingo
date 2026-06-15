@@ -1,3 +1,12 @@
+---
+tags:
+  - track:backyard
+  - sponsor:openbmb
+  - sponsor:openai
+  - achievement:offgrid
+  - achievement:offbrand
+---
+
 # SignLingo
 
 Practice American Sign Language with real-time webcam feedback and DTW-based scoring.
