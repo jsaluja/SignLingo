@@ -51,8 +51,8 @@ Use **Add Sign** in the app to add your own practice items and organize signs in
 
 ## Tech
 
-- MiniCPM-V via OpenBMB for AI coaching
-- OpenAI Codex-assisted development
+- [MiniCPM-V via OpenBMB](https://github.com/OpenBMB/MiniCPM-V) for AI coaching
+- [OpenAI Codex](https://openai.com/codex/) assisted development
 - MediaPipe Tasks Vision (hand + pose landmarks)
 - DTW comparison in JS
 - Firebase Auth + Firestore (optional)
