@@ -1,0 +1,64 @@
+name: Deploy to HF Space
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install frontend deps
+        run: npm ci
+        working-directory: app
+
+      - name: Build React app
+        run: npm run build
+        working-directory: app
+
+      - name: Copy assets to gradio_app/dist
+        run: |
+          rm -rf gradio_app/dist
+          cp -r app/dist gradio_app/dist
+          mkdir -p gradio_app/dist/videos gradio_app/dist/landmarks
+          cp app/public/videos/*.mp4   gradio_app/dist/videos/
+          cp app/public/landmarks/*.json gradio_app/dist/landmarks/
+          cp app/public/favicon.svg    gradio_app/dist/ 2>/dev/null || true
+          cp app/public/icons.svg      gradio_app/dist/ 2>/dev/null || true
+
+      - name: Push gradio_app to HF Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          pip install -q huggingface_hub
+          python3 - <<'EOF'
+          import os
+          from huggingface_hub import HfApi
+          api = HfApi(token=os.environ["HF_TOKEN"])
+          api.create_repo(
+              repo_id="build-small-hackathon/hands-up-asl",
+              repo_type="space",
+              space_sdk="gradio",
+              private=True,
+              exist_ok=True,
+          )
+          api.upload_folder(
+              folder_path="gradio_app",
+              repo_id="build-small-hackathon/hands-up-asl",
+              repo_type="space",
+              commit_message="Auto-deploy from GitHub Actions",
+              ignore_patterns=["__pycache__", "*.pyc", ".DS_Store", "dist/"],
+          )
+          print("Deployed successfully.")
+          EOF

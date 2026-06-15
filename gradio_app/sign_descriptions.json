@@ -1,0 +1,62 @@
+{
+  "hello": {
+    "word": "hello",
+    "display": "Hello",
+    "description": "Wave motion near the side of the head. Dominant hand starts with open palm facing outward, positioned near the forehead/temple area. Hand moves outward in a small wave motion, like a casual wave goodbye. Single smooth outward movement. One hand used (dominant). Hand stays at head level throughout."
+  },
+  "yes": {
+    "word": "yes",
+    "display": "Yes",
+    "description": "Fist nodding motion. Dominant hand forms a fist (like the letter S). Fist moves up and down repeatedly at the wrist, mimicking a head nodding yes. Located in neutral signing space in front of the body. 2-3 small nodding movements. One hand used (dominant)."
+  },
+  "no": {
+    "word": "no",
+    "display": "No",
+    "description": "Index and middle finger snap to thumb. Dominant hand starts with index and middle fingers extended (like the letter U or N). Fingers snap down to meet the thumb in a pinching motion. Quick snapping movement repeated 1-2 times. Located in neutral space. One hand used (dominant)."
+  },
+  "thank_you": {
+    "word": "thank_you",
+    "display": "Thank You",
+    "description": "Flat hand moves from chin outward. Dominant hand is flat with fingers together (like the letter B). Hand starts touching the chin or lips area with fingertips. Hand moves outward and slightly downward, away from the face. Single smooth movement. One hand used (dominant). Similar to blowing a kiss motion."
+  },
+  "pain": {
+    "word": "pain",
+    "display": "Pain",
+    "description": "Two index fingers twist toward each other. Both hands form pointing index fingers (like the letter D or number 1). Index fingers point toward each other and twist or rotate in opposite directions. Twisting motion repeated 2-3 times. Hands positioned at location of pain or in neutral space. Both hands used, moving symmetrically."
+  },
+  "head": {
+    "word": "head",
+    "display": "Head",
+    "description": "Fingertips tap the side of the head. Dominant hand is flat with fingers together, bent at knuckles (bent-B handshape). Fingertips tap the temple or side of forehead area. Two quick taps. One hand used (dominant). Hand approaches head from the side."
+  },
+  "back": {
+    "word": "back",
+    "display": "Back",
+    "description": "Hand reaches behind to touch the back. Dominant hand reaches over the shoulder or around the side to touch or pat the upper back area. Palm faces the body. Single touch or pat motion. One hand used (dominant). Shows the location of the back on your own body."
+  },
+  "sick": {
+    "word": "sick",
+    "display": "Sick",
+    "description": "Middle fingers touch forehead and stomach. Both hands form open-5 handshape with middle finger bent forward. One hand touches forehead with bent middle finger, other hand touches stomach simultaneously. Can also alternate touching forehead then stomach. Both hands used. Shows sickness affecting head and stomach."
+  },
+  "fever": {
+    "word": "fever",
+    "display": "Fever",
+    "description": "Back of hand touches forehead, checking temperature. Dominant hand is flat or slightly bent. Back of the hand (not palm) touches the forehead, like checking for fever. May include slight upward movement afterward. One hand used (dominant). Mimics the gesture of feeling forehead for temperature."
+  },
+  "medicine": {
+    "word": "medicine",
+    "display": "Medicine",
+    "description": "Middle finger circles in palm. Non-dominant hand is flat with palm facing up. Dominant hand has middle finger extended and bent, touching the center of the flat palm. Middle finger makes small circular grinding motions in the palm. Multiple circular motions. Both hands used. Mimics grinding medicine with mortar and pestle."
+  },
+  "water": {
+    "word": "water",
+    "display": "Water",
+    "description": "W handshape taps chin. Dominant hand forms the letter W (three fingers extended and spread). The index finger side of the W hand taps the chin twice. Located at the chin/mouth area. Two quick taps. One hand used (dominant). The W stands for Water."
+  },
+  "blood": {
+    "word": "blood",
+    "display": "Blood",
+    "description": "Wiggling fingers flow down from the back of the hand. Non-dominant hand is flat, palm facing down. Dominant hand starts at the back of the non-dominant hand with fingers spread (5 handshape). Dominant hand moves downward while wiggling fingers, representing blood flowing. Both hands used. Shows liquid dripping down."
+  }
+}

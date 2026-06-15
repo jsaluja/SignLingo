@@ -1,0 +1,1245 @@
+/* SignLingo styles */
+
+:root {
+  --bg-dark: #1a1a2e;
+  --bg-panel: #16213e;
+  --accent: #0f3460;
+  --highlight: #e94560;
+  --success: #4caf50;
+  --text: #eee;
+  --text-dim: #888;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 1rem 2rem;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--accent);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.progress {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.progress .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.progress .dot:hover {
+  transform: scale(1.2);
+}
+
+.progress .dot.current {
+  background: var(--highlight);
+  box-shadow: 0 0 8px var(--highlight);
+}
+
+.progress .dot.completed {
+  background: var(--success);
+}
+
+/* Auth */
+.auth-signin {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.auth-signin:hover {
+  background: var(--accent);
+}
+
+.auth-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.auth-name {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.auth-signout {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.auth-signout:hover {
+  border-color: var(--highlight);
+  color: var(--highlight);
+}
+
+/* Sign navigation bar */
+.sign-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 2rem;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--accent);
+}
+
+.sign-nav-arrow {
+  background: none;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1;
+}
+
+.sign-nav-arrow:hover {
+  background: var(--accent);
+  border-color: var(--highlight);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-dark);
+  border-radius: 8px;
+  padding: 3px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tab {
+  padding: 0.4rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: var(--text);
+}
+
+/* Library view */
+.library-view {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.library-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.library-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.library-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+}
+
+.sign-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.sign-card:hover {
+  border-color: var(--text-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.sign-card.active {
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 1px var(--highlight);
+}
+
+.sign-card.completed {
+  border-color: var(--success);
+}
+
+.sign-card-video {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #000;
+  overflow: hidden;
+}
+
+.sign-card-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sign-card-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--success);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-card-delete {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  opacity: 0;
+}
+
+.sign-card:hover .sign-card-delete {
+  opacity: 1;
+}
+
+.sign-card-delete:hover {
+  background: var(--highlight);
+  color: white;
+}
+
+.sign-card.selectable {
+  cursor: pointer;
+}
+
+.sign-card.selected {
+  outline: 2px solid var(--highlight);
+  outline-offset: -2px;
+}
+
+.sign-card-checkbox {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.5);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-card-checkbox.checked {
+  background: var(--highlight);
+  border-color: var(--highlight);
+}
+
+.sign-card-custom-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.select-btn, .cancel-btn {
+  padding: 0.45rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.select-btn:hover, .cancel-btn:hover {
+  background: var(--border);
+}
+
+.delete-btn {
+  padding: 0.45rem 0.9rem;
+  background: #dc3545;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sign-card-footer {
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.sign-card-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.sign-card-description {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.sign-card-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.sign-card-practice {
+  padding: 0.3rem 0.7rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 5px;
+  color: var(--text);
+  font-size: 0.78rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.sign-card-practice:hover {
+  background: var(--highlight);
+}
+
+.library-empty {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* Add Sign / Library buttons */
+.add-sign-btn {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.add-sign-btn:hover {
+  background: var(--accent);
+  border-color: var(--highlight);
+}
+
+/* Inventory modal */
+.inventory-modal {
+  width: 560px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.inventory-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inventory-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.inventory-close:hover {
+  color: var(--highlight);
+}
+
+.inventory-section-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.inventory-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 0.5rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.inventory-card:hover {
+  border-color: var(--text-dim);
+}
+
+.inventory-card.active {
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 1px var(--highlight);
+}
+
+.inventory-card.completed {
+  border-color: var(--success);
+}
+
+/* Custom sign cards have a split layout */
+.inventory-card.custom {
+  padding: 0;
+  overflow: hidden;
+}
+
+.inventory-card-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.7rem 0.4rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.inventory-delete {
+  padding: 0.4rem 0.5rem;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--accent);
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.15s;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.inventory-delete:hover {
+  background: var(--highlight);
+  color: white;
+}
+
+.inventory-check {
+  color: var(--success);
+  font-size: 0.8rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--bg-panel);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 420px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.modal h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-field label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.modal-field input {
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-dark);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-field input:focus {
+  border-color: var(--highlight);
+}
+
+.drop-zone {
+  border: 2px dashed var(--accent);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.drop-zone:hover,
+.drop-zone.dragging {
+  border-color: var(--highlight);
+  background: rgba(233, 69, 96, 0.05);
+}
+
+.drop-zone.has-file {
+  border-style: solid;
+  border-color: var(--success);
+  color: var(--text);
+}
+
+.drop-icon {
+  font-size: 2rem;
+}
+
+.drop-filename {
+  font-size: 0.9rem;
+  word-break: break-all;
+  text-align: center;
+}
+
+.extraction-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.progress-msg {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.progress-track {
+  height: 6px;
+  background: var(--accent);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--highlight);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.modal-error {
+  color: var(--highlight);
+  font-size: 0.9rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.modal-cancel {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.modal-cancel:hover:not(:disabled) {
+  background: var(--accent);
+}
+
+.modal-cancel:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.modal-submit {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--highlight);
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.modal-submit:hover:not(:disabled) {
+  background: #ff6b81;
+}
+
+.modal-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Main content */
+main {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  border-radius: 12px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.panel h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/* Video/Webcam containers */
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-container canvas.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Video panel controls */
+.video-panel .controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+}
+
+.play-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.play-btn:hover {
+  background: var(--highlight);
+}
+
+/* Video scrubber */
+.scrubber {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--accent);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--highlight);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.scrubber::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.scrubber::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--highlight);
+  border: none;
+  cursor: pointer;
+}
+
+.frame-counter {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  min-width: 70px;
+  text-align: right;
+}
+
+.time-display {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+}
+
+.timeline-container {
+  flex: 1;
+  position: relative;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.timeline-container .scrubber {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 2;
+  margin: 0;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--highlight);
+  border-radius: 3px;
+  pointer-events: none;
+  transition: width 0.05s linear;
+}
+
+/* Speed controls */
+.speed-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.speed-controls button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.speed-controls button:hover,
+.speed-controls button.active {
+  background: var(--accent);
+  border-color: var(--highlight);
+}
+
+/* Webcam panel */
+.webcam-panel {
+  width: 100%;
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2a1a1a, #1a1a2a);
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.error-content h3 {
+  margin-bottom: 0.5rem;
+  color: var(--highlight);
+}
+
+.error-content p {
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  max-width: 280px;
+}
+
+.retry-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.retry-btn:hover {
+  background: var(--highlight);
+}
+
+.webcam-panel.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/9;
+  background: #2a1a1a;
+  border-radius: 8px;
+  text-align: center;
+  color: #e94560;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--accent);
+  border-top-color: var(--highlight);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: background 0.3s;
+}
+
+.status-dot.detected {
+  background: var(--success);
+  box-shadow: 0 0 6px var(--success);
+}
+
+.recording-badge {
+  margin-left: auto;
+  color: var(--highlight);
+  font-weight: bold;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Score display */
+.score-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  margin-top: 0.4rem;
+  border-radius: 6px;
+  background: var(--accent);
+  min-height: 2.4rem;
+}
+
+.score-display .word {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.score-display .instruction {
+  font-size: 1rem;
+  color: var(--text-dim);
+}
+
+.score-display .score {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.score-display .result {
+  font-size: 1rem;
+}
+
+.score-display.passed {
+  background: linear-gradient(135deg, #1b5e20, #2e7d32);
+}
+
+.score-display.passed .result {
+  color: #a5d6a7;
+}
+
+.score-display.failed {
+  background: linear-gradient(135deg, #b71c1c, #c62828);
+}
+
+.score-display.failed .result {
+  color: #ef9a9a;
+}
+
+/* Sign description (below reference video and in library cards) */
+.sign-description {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin: 0.25rem 0 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* VLM coaching feedback */
+.feedback {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0.4rem 0 0;
+  padding: 0.4rem 0.6rem;
+  border-left: 2px solid var(--accent);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.feedback-loading {
+  opacity: 0.5;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Action buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.action-buttons button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.record-btn {
+  background: var(--highlight);
+  color: white;
+}
+
+.record-btn:hover {
+  background: #ff6b81;
+  transform: scale(1.02);
+}
+
+.stop-btn {
+  background: #ff9800;
+  color: white;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.stop-btn:hover {
+  background: #ffb74d;
+}
+
+.next-btn {
+  background: var(--success);
+  color: white;
+}
+
+.next-btn:hover {
+  background: #66bb6a;
+  transform: scale(1.02);
+}
+
+/* Footer */
+footer {
+  padding: 1rem;
+  text-align: center;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--accent);
+  color: var(--text-dim);
+}
+
+footer kbd {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  background: var(--accent);
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+  }
+
+  .panel {
+    min-height: auto;
+  }
+}
+
+/* Debug Panel */
+.debug-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  color: #0f0;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  border-top: 1px solid #333;
+  z-index: 1000;
+}
+
+.debug-panel strong {
+  color: #ff0;
+}
+
+/* Auto-detection indicators */
+.recording-indicator {
+  color: #e94560;
+  font-weight: bold;
+  animation: pulse 1s infinite;
+}
+
+.ready-indicator {
+  color: var(--text-dim);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Recording overlay */
+.recording-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(233, 69, 96, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10;
+  animation: pulse 1s infinite;
+}
+
+.recording-overlay .rec-dot {
+  color: white;
+  margin-right: 4px;
+}
+
