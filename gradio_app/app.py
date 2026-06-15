@@ -145,11 +145,6 @@ async def api_feedback(request: Request):
     if not user_images:
         return JSONResponse({"error": "could not decode frames"}, status_code=400)
 
-    try:
-        load_model()
-    except Exception as e:
-        return JSONResponse({"error": f"model load failed: {e}"}, status_code=500)
-
     if ref_images:
         prompt = (
             f'You are an ASL coach. The student is learning to sign "{word}".\n'
@@ -204,11 +199,6 @@ async def api_describe(request: Request):
 
     if not images:
         return JSONResponse({"error": "bad frames"}, status_code=400)
-
-    try:
-        load_model()
-    except Exception as e:
-        return JSONResponse({"error": f"model load failed: {e}"}, status_code=500)
 
     n = len(images)
     prompt = (
