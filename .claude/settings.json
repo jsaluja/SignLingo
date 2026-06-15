@@ -1,7 +1,27 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pip install *)"
+      "Bash(pip install *)",
+      "Bash(git commit -m ' *)",
+      "Bash(ps -p 22645 -o args=)",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s --max-time 5 http://localhost:7860/api/feedback -X POST -H \"Content-Type: application/json\" -d '{\"userFrames\":[],\"word\":\"x\",\"score\":0}')",
+      "Bash(curl -s http://localhost:7860/api/feedback -X POST -H 'Content-Type: application/json' -d '{\"userFrames\":[\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoH/8QAFBABAAAAAAAAAAAAAAAAAAAAoP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/9k=\"],\"word\":\"Hello\",\"description\":\"test\",\"score\":43}')",
+      "Bash(rm -rf gradio_app/dist)",
+      "Bash(cp -r app/dist gradio_app/dist)",
+      "Bash(mkdir -p gradio_app/dist/videos gradio_app/dist/landmarks)",
+      "Bash(cp app/public/videos/*.mp4 gradio_app/dist/videos/)",
+      "Bash(cp app/public/landmarks/*.json gradio_app/dist/landmarks/)",
+      "Bash(curl -s --max-time 3 http://localhost:7860/)",
+      "Bash(curl -s --max-time 3 http://localhost:5173/)",
+      "Bash(./build.sh)",
+      "Bash(rsync -av --delete app/dist/ gradio_app/dist/ --exclude='*.map')",
+      "Bash(pkill -f \"python.*app.py\")",
+      "Bash(pkill -f \"vite\")",
+      "Bash(cd /Users/jaspal/Documents/GitHub/hands-up-asl/gradio_app)",
+      "Read(//Users/jaspal/**)",
+      "Bash(curl -s http://localhost:7860/)",
+      "Bash(echo \"pid $!\")"
     ]
   }
 }

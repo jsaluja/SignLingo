@@ -47,7 +47,7 @@ jobs:
           from huggingface_hub import HfApi
           api = HfApi(token=os.environ["HF_TOKEN"])
           api.create_repo(
-              repo_id="build-small-hackathon/hands-up-asl",
+              repo_id="build-small-hackathon/SignLingo",
               repo_type="space",
               space_sdk="gradio",
               private=True,
@@ -55,10 +55,10 @@ jobs:
           )
           api.upload_folder(
               folder_path="gradio_app",
-              repo_id="build-small-hackathon/hands-up-asl",
+              repo_id="build-small-hackathon/SignLingo",
               repo_type="space",
               commit_message="Auto-deploy from GitHub Actions",
-              ignore_patterns=["__pycache__", "*.pyc", ".DS_Store", "dist/"],
+              ignore_patterns=["__pycache__", "*.pyc", ".DS_Store"],
           )
           print("Deployed successfully.")
           EOF
